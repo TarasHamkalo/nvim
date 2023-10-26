@@ -1,5 +1,5 @@
 #!/bin/bash
-#wget https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
+#wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
 #unzip Hack-v3.003-ttf.zip
 #mv ./ttf/* ~/.fonts/
 #fc-cache -f -v
