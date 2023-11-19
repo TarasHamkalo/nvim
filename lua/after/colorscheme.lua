@@ -1,18 +1,15 @@
 local rose = require("rose-pine")
 local gruvbox = require("gruvbox")
 
-local color = "rose-pine"
+local color = "gruber-darker"
+
 function Draw(userColor)
     if userColor then
         color = userColor
     end
 
-    rose.setup({
-        disable_background = true
-    })
-    gruvbox.setup({
-        disable_background = true
-    })
+    rose.setup({ disable_background = true })
+    gruvbox.setup({ disable_background = true })
 
     vim.cmd.colorscheme(color)
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
