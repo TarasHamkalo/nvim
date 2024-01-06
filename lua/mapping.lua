@@ -42,4 +42,7 @@ nmap("n", "nzz")
 nmap("N", "Nzz")
 
 -- Terminal
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", {noremap = true});
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", {noremap = true})
+
+-- Lang
+--vim.api.nvim_set_option('langmap', 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz')
