@@ -19,21 +19,35 @@ nmap("<leader>n", "<cmd>Neotree toggle<CR>") -- Toggle file explorer
 --
 
 -- Hop
-nmap("<leader>j", "<cmd>HopWordAC<CR>")
-nmap("<leader>k", "<cmd>HopWordBC<CR>")
+nmap("<leader>ju", "<cmd>HopPattern<CR>")
 
 -- Vim
 -- Noh search after ESC
 nmap("<ESC>", "<ESC><cmd>noh<CR>")
 
 -- Splits
-nmap("<c-h>", "<c-w>h")
-nmap("<c-j>", "<c-w>j")
-nmap("<c-k>", "<c-w>k")
-nmap("<c-l>", "<c-w>l")
+nmap("sh", "<c-w>h")
+nmap("sj", "<c-w>j")
+nmap("sk", "<c-w>k")
+nmap("sl", "<c-w>l")
 
-nmap("<leader>-", "<cmd>vertical resize -10<CR>")
-nmap("<leader>=", "<cmd>vertical resize +10<CR>")
+nmap("ss", ":split<Return>")
+nmap("sv", ":vsplit<Return>")
+--
+
+-- Splits width
+
+-- decrement 
+nmap("<c-h>", "<C-w><")
+-- increment
+nmap("<c-l>", "<C-w>>")
+-- Split height
+nmap("<c-k>", "<C-w>+")
+nmap("<c-j>", "<C-w>-")
+
+
+-- nmap("<leader>-", "<cmd>vertical resize -10<CR>")
+-- nmap("<leader>=", "<cmd>vertical resize +10<CR>")
 
 -- Center screen
 nmap("<c-u>", "<c-u>zz")
