@@ -5,6 +5,7 @@ configs.setup({
 		"markdown",
 		"lua",
 		"vim",
+		"vimdoc",
 		"c",
 		"java",
 	},
