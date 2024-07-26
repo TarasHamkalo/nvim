@@ -1,22 +1,21 @@
-require("helpers/globals")
-
 -- Set associating between turned on plugins and filetype
-cmd([[filetype plugin on]])
+vim.cmd([[filetype plugin on]])
 
 -- Disable comments on pressing Enter
-cmd([[autocmd FileType * setlocal formatoptions-=cro]])
+vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
 
 -- FileTypes
-cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
+vim.cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
 
 
 
 -- File storage
 -- vim.opt.undofile = true
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+local opt = vim.opt
 
 -- No swap
-vim.opt.swapfile = false
+opt.swapfile = false
 
 -- Current line
 opt.cursorline = true

@@ -1,59 +1,56 @@
-require("helpers/globals")
-require("helpers/mapping-functions")
-
-g.mapleader = " "
+local keymap = vim.keymap -- for conciseness
+vim.g.mapleader = " "
 
 -- Dap 
 --
 
 -- Telescope
-nmap("<leader>ff", "<cmd>Telescope find_files<CR>") -- Search for a file (ignoring git-ignore)
-nmap("<leader>gb", "<cmd>Telescope git_branches<CR>") -- Show git branches
-nmap("<leader>fw", "<cmd>Telescope live_grep<CR>") -- Find a string in project
-nmap("<leader>fr", "<cmd>Telescope buffers<CR>") -- Show all buffers
-nmap("<leader>ot", "<cmd>Telescope<CR>") -- Show all commands
+keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {desc = "Search for a file (ignoring git-ignore)"})
+
+keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", {desc = "Show git branches"})
+keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", {desc = "Find a string in project"})
+keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", {desc = "Show all buffers"})
+keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", {desc = "Show all commands"})
 --
 
 -- Neo Tree
-nmap("<leader>n", "<cmd>Neotree toggle<CR>") -- Toggle file explorer
+keymap.set("n", "<leader>n", "<cmd>Neotree toggle<CR>", {desc = "Toggle file explorer"})
 --
 
 -- Hop
-nmap("<leader>ju", "<cmd>HopPattern<CR>")
+keymap.set("n", "<leader>ju", "<cmd>HopPattern<CR>", {desc = "Hop to pattern"})
 
 -- Vim
 -- Noh search after ESC
-nmap("<ESC>", "<ESC><cmd>noh<CR>")
+keymap.set("n", "<ESC>", "<ESC><cmd>noh<CR>", {desc = "Remove highlight"})
 
 -- Splits
-nmap("sh", "<c-w>h")
-nmap("sj", "<c-w>j")
-nmap("sk", "<c-w>k")
-nmap("sl", "<c-w>l")
+keymap.set("n", "sh", "<c-w>h", {desc = "Split h"})
+keymap.set("n", "sj", "<c-w>j", {desc = "Split j"})
+keymap.set("n", "sk", "<c-w>k", {desc = "Split k"})
+keymap.set("n", "sl", "<c-w>l", {desc = "Split l"})
 
-nmap("ss", ":split<Return>")
-nmap("sv", ":vsplit<Return>")
+keymap.set("n", "ss", ":split<Return>", {desc = "Split horizontally"})
+keymap.set("n", "sv", ":vsplit<Return>", {desc = "Split vertically"})
 --
 
 -- Splits width
+keymap.set("n", "<c-h>", "<C-w><", {desc = "Make split wider"})
+keymap.set("n", "<c-l>", "<C-w>>", {desc = "Make split narrower"})
 
--- decrement 
-nmap("<c-h>", "<C-w><")
--- increment
-nmap("<c-l>", "<C-w>>")
 -- Split height
-nmap("<c-k>", "<C-w>+")
-nmap("<c-j>", "<C-w>-")
+keymap.set("n", "<c-k>", "<C-w>+", {desc = "Make split higher"})
+keymap.set("n", "<c-j>", "<C-w>-", {desc = "Make split shorter"})
 
 
--- nmap("<leader>-", "<cmd>vertical resize -10<CR>")
--- nmap("<leader>=", "<cmd>vertical resize +10<CR>")
+-- keymap.set("n", "<leader>-", "<cmd>vertical resize -10<CR>")
+-- keymap.set("n", "<leader>=", "<cmd>vertical resize +10<CR>")
 
 -- Center screen
-nmap("<c-u>", "<c-u>zz")
-nmap("<c-d>", "<c-d>zz")
-nmap("n", "nzz")
-nmap("N", "Nzz")
+keymap.set("n", "<c-u>", "<c-u>zz")
+keymap.set("n", "<c-d>", "<c-d>zz")
+keymap.set("n", "n", "nzz")
+keymap.set("n", "N", "Nzz")
 
 -- Terminal
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", {noremap = true})

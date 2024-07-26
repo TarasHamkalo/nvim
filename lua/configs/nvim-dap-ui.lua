@@ -9,14 +9,9 @@ dapui.setup()
 -- 	desc = "Toggle Simple Debug ui",
 -- })
 
-vim.keymap.set("n", "<leader>du", function()
-	dapui.toggle()
-end, {
-	desc = "Toggle Full Debug ui",
-})
-
-vim.keymap.set("v", "<leader>de", "<Cmd>lua require(\"dapui\").eval()<CR>")
-vim.keymap.set("n", "<leader>de", "<Cmd>lua require(\"dapui\").eval()<CR>")
+vim.keymap.set("n", "<leader>du", function() dapui.toggle() end, {desc = "Toggle Full Debug ui"})
+vim.keymap.set("v", "<leader>de", "<Cmd>lua require(\"dapui\").eval()<CR>", {desc = "Debug evaluate expression"})
+vim.keymap.set("n", "<leader>de", "<Cmd>lua require(\"dapui\").eval()<CR>", {desc = "Debug evaluate expression"})
 -- dap.listeners.after.event_initialized["dapui_config"] = function()
 -- dapui.open()
 -- end

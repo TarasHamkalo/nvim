@@ -1,4 +1,3 @@
-require("helpers.mapping-functions")
 
 local lspconfig = require("lspconfig")
 
@@ -45,7 +44,7 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
 	opts.desc = "Format buffer"
-	keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+	keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
 end
 
 -- used to enable autocompletion (assign to every lsp server config)
