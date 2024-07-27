@@ -28,7 +28,17 @@ cmp.setup({
 		{ name = "luasnip" }, -- Luasnip
 		{ name = "buffer" }, -- Buffers
 		{ name = "path" }, -- Paths
-	}, {}),
+		-- {
+		-- 	name = "spell",
+		-- 	option = {
+		-- 		keep_all_entries = false,
+		-- 		enable_in_context = function()
+		-- 			return true
+		-- 		end,
+		-- 		preselect_correct_word = true,
+		-- 	},
+		-- },
+	}),
 
 	formatting = {
 		format = lspkind.cmp_format({

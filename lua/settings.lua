@@ -81,6 +81,10 @@ opt.splitright = true
 opt.wildmenu = true
 opt.wildmode = "longest:full,full"
 
+-- Spell checker
+vim.opt.spell = true
+vim.opt.spelllang = {"en_us", "sk"}
+
 -- -- Default Plugins {{{
 -- local disabled_built_ins = {
 -- 	--"netrw",
