@@ -13,7 +13,6 @@ vim.cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
 -- vim.opt.undofile = true
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 local opt = vim.opt
-
 -- No swap
 opt.swapfile = false
 

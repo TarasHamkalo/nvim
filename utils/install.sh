@@ -5,6 +5,6 @@
 #fc-cache -f -v
 
 sudo apt update 
-sudo apt install curl fd-find ripgrep xclip nodejs npm python3-pip openjdk-17-jdk cargo -y
+sudo apt install latexmk biber luarocks curl fd-find ripgrep xclip nodejs npm python3-pip openjdk-17-jdk cargo -y
 sudo npm install -g tree-sitter -y
 sudo apt install python3-neovim -y

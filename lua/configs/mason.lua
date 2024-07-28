@@ -23,8 +23,8 @@ mason_lspconfig.setup({
 		"html",
 		"cssls",
 		"lua_ls",
-		-- "pyright",
 		"clangd",
+		-- "pyright",
 		-- "jdtls",
 	},
 	-- auto-install configured servers (with lspconfig)

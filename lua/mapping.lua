@@ -1,5 +1,6 @@
 local keymap = vim.keymap -- for conciseness
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Dap 
 --

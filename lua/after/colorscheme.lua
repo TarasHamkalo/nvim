@@ -28,7 +28,6 @@ function BgReset(userColor)
         disable_background = false
     })
 
-
     vim.cmd("hi clear")
     vim.cmd.colorscheme(color)
 end
