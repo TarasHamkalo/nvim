@@ -36,7 +36,7 @@ return {
 						"c", "java", "css", "html", "json",
 					},
 
-					extra_args = { "--tab-width 4"},
+					extra_args = { "--tab-width 2"},
 				}),
 
 				formatting.prettier,

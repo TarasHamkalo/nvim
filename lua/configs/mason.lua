@@ -8,32 +8,40 @@ local mason_tool_installer = require("mason-tool-installer")
 
 -- enable mason and configure icons
 mason.setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
+  },
 })
 
 mason_lspconfig.setup({
-	-- list of servers for mason to install
-	ensure_installed = {
-		"html",
-		"cssls",
-		"lua_ls",
-		"clangd",
-		-- "pyright",
-		-- "jdtls",
-	},
-	-- auto-install configured servers (with lspconfig)
-	automatic_installation = true, -- not the same as ensure_installed
+  -- list of servers for mason to install
+  ensure_installed = {
+    "html",
+    "cssls",
+    "lua_ls",
+    "clangd",
+    -- "pyright",
+    -- "jdtls",
+  },
+  -- auto-install configured servers (with lspconfig)
+  automatic_installation = true, -- not the same as ensure_installed
 })
 
 mason_tool_installer.setup({
-	ensure_installed = {
-		"prettier", -- prettier formatter
-		"stylua", -- lua formatter
-	},
+  ensure_installed = {
+    "prettier", -- prettier formatter
+    "prettierd",
+    "stylua",   -- lua formatter
+    "cpplint",
+    "luacheck",
+    "xmlformatter",
+    "htmlbeautifier",
+    "beautysh",
+    "yamlfix",
+    "shellcheck",
+  },
 })
