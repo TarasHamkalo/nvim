@@ -1,4 +1,4 @@
-local neotree = require("neo-tree")
+local neotree = require("unused.neo-tree")
 
 neotree.setup({
 	close_if_last_window = false,
