@@ -7,6 +7,13 @@ vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
 -- FileTypes
 vim.cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.tabstop = 2
+	end
+})
 
 
 -- File storage
