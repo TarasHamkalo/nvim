@@ -8,7 +8,6 @@ vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
 vim.cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
 
 
-
 -- File storage
 -- vim.opt.undofile = true
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"

@@ -16,10 +16,6 @@ keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", {desc = "Show all commands"}
 
 -- Neo Tree
 keymap.set("n", "<leader>n", "<cmd>Neotree toggle<CR>", {desc = "Toggle file explorer"})
---
-
--- Hop
-keymap.set("n", "<leader>ju", "<cmd>HopPattern<CR>", {desc = "Hop to pattern"})
 
 -- Vim
 -- Noh search after ESC
