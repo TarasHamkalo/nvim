@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
-
 -- File storage
 -- vim.opt.undofile = true
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
