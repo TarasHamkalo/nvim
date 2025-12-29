@@ -1,5 +1,3 @@
-local lspconfig = require("lspconfig")
-
 -- import cmp-nvim-lsp plugin
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -76,17 +74,15 @@ end
 -- })
 
 -- configure lua server (with special settings)
-lspconfig["lua_ls"].setup({
+vim.lsp.config.lua_ls = {
   capabilities = capabilities,
   on_attach = on_attach,
-  settings = { -- custom settings for lua
+  settings = {
     Lua = {
-      -- make the language server recognize "vim" global
       diagnostics = {
         globals = { "vim" },
       },
       workspace = {
-        -- make language server aware of runtime files
         library = {
           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
           [vim.fn.stdpath("config") .. "/lua"] = true,
@@ -94,12 +90,33 @@ lspconfig["lua_ls"].setup({
       },
     },
   },
-})
+}
 
-lspconfig["clangd"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+vim.lsp.enable("lua_ls")
+-- lspconfig["lua_ls"].setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = { -- custom settings for lua
+--     Lua = {
+--       -- make the language server recognize "vim" global
+--       diagnostics = {
+--         globals = { "vim" },
+--       },
+--       workspace = {
+--         -- make language server aware of runtime files
+--         library = {
+--           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+--           [vim.fn.stdpath("config") .. "/lua"] = true,
+--         },
+--       },
+--     },
+--   },
+-- })
+
+-- lspconfig["clangd"].setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- })
 
 -- lspconfig["jdtls"].setup({
 -- 	capabilities = capabilities,

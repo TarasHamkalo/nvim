@@ -20,10 +20,10 @@ mason.setup({
 mason_lspconfig.setup({
   -- list of servers for mason to install
   ensure_installed = {
-    "html",
-    "cssls",
-    "lua_ls",
-    "clangd",
+    -- "html",
+    -- "cssls",
+    -- "lua_ls",
+    -- "clangd",
     -- "pyright",
     -- "jdtls",
   },
@@ -34,12 +34,12 @@ mason_lspconfig.setup({
 mason_tool_installer.setup({
   ensure_installed = {
     "prettier", -- prettier formatter
-    "prettierd",
-    "stylua",   -- lua formatter
-    "cpplint",
-    "luacheck",
+    -- "prettierd",
+    -- "stylua",   -- lua formatter
+    -- "cpplint",
+    -- "luacheck",
     "xmlformatter",
-    "htmlbeautifier",
+    -- "htmlbeautifier",
     "beautysh",
     "yamlfix",
     "shellcheck",
