@@ -33,15 +33,11 @@ mason_lspconfig.setup({
 
 mason_tool_installer.setup({
   ensure_installed = {
-    "prettier", -- prettier formatter
-    -- "prettierd",
-    -- "stylua",   -- lua formatter
-    -- "cpplint",
+    "prettier",
+    "prettierd",
+    "stylua",   
     -- "luacheck",
     "xmlformatter",
-    -- "htmlbeautifier",
-    "beautysh",
     "yamlfix",
-    "shellcheck",
   },
 })
