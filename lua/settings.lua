@@ -15,11 +15,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
-
 -- File storage
--- vim.opt.undofile = true
--- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 local opt = vim.opt
+
+-- Undo
+opt.undofile = true
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
 -- No swap
 opt.swapfile = false
 
@@ -27,7 +29,7 @@ opt.swapfile = false
 opt.cursorline = true
 
 -- Column wrap
-opt.colorcolumn = "100"
+opt.colorcolumn = "80"
 opt.compatible = false
 
 -- Set scrolloff to 10 lines
@@ -90,29 +92,3 @@ opt.wildmode = "longest:full,full"
 -- Spell checker
 vim.opt.spell = true
 vim.opt.spelllang = {"en_us", "cs"}
-
--- -- Default Plugins {{{
--- local disabled_built_ins = {
--- 	--"netrw",
--- 	--"netrwPlugin",
--- 	--"netrwSettings",
--- 	--"netrwFileHandlers",
--- 	"gzip",
--- 	"zip",
--- 	"zipPlugin",
--- 	"tar",
--- 	"tarPlugin",
--- 	"getscript",
--- 	"getscriptPlugin",
--- 	"vimball",
--- 	"vimballPlugin",
--- 	"2html_plugin",
--- 	"logipat",
--- 	"rrhelper",
--- 	"spellfile_plugin",
--- 	"matchit",
--- }
---
--- for _, plugin in pairs(disabled_built_ins) do
--- 	g["loaded_" .. plugin] = 1
--- end

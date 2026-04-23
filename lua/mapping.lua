@@ -4,16 +4,6 @@ vim.g.maplocalleader = " "
 
 -- Dap 
 --
-
--- Telescope
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {desc = "Search for a file (ignoring git-ignore)"})
-
-keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", {desc = "Show git branches"})
-keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", {desc = "Find a string in project"})
-keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", {desc = "Show all buffers"})
-keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", {desc = "Show all commands"})
---
-
 -- Explorer
 keymap.set("n", "<leader>n", "<cmd>Explore<CR>", {desc = "Toggle file explorer"})
 vim.api.nvim_create_autocmd("FileType", {
@@ -65,9 +55,6 @@ keymap.set("n", "<c-u>", "<c-u>zz")
 keymap.set("n", "<c-d>", "<c-d>zz")
 keymap.set("n", "n", "nzz")
 keymap.set("n", "N", "Nzz")
-
--- Terminal
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", {noremap = true})
 
 -- Lang
 --vim.api.nvim_set_option('langmap', 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz')
