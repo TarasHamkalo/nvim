@@ -14,12 +14,25 @@ keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", {desc = "Show all bu
 keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", {desc = "Show all commands"})
 --
 
--- Neo Tree
-keymap.set("n", "<leader>n", "<cmd>Neotree toggle<CR>", {desc = "Toggle file explorer"})
---
+-- Explorer
+keymap.set("n", "<leader>n", "<cmd>Explore<CR>", {desc = "Toggle file explorer"})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  callback = function()
+    pcall(vim.keymap.del, "n", "s", { buffer = true })
+    pcall(vim.keymap.del, "n", "S", { buffer = true })
+    pcall(vim.keymap.del, "n", "D", { buffer = true })
 
--- Hop
-keymap.set("n", "<leader>ju", "<cmd>HopPattern<CR>", {desc = "Hop to pattern"})
+    vim.keymap.set("n", "D", function()
+      local dir = vim.b.netrw_curdir
+      local file = vim.fn.expand("<cfile>")
+      local fullpath = dir .. "/" .. file
+
+      vim.fn.system({ "trash-put", fullpath})
+      vim.cmd("Explore")
+    end, { buffer = true })
+  end,
+})
 
 -- Vim
 -- Noh search after ESC
