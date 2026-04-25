@@ -11,16 +11,15 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		-- "hrsh7th/cmp-nvim-lua",
-    -- To this:
-    {
-      "folke/lazydev.nvim",
-      ft = "lua",
-      opts = {
-        library = {
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        },
-      },
-    },
+		{
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {
+				library = {
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
+			},
+		},
 
 		"hrsh7th/cmp-nvim-lsp",
 
@@ -36,9 +35,11 @@ return {
 			"antosha417/nvim-lsp-file-operations",
 			config = true,
 		},
-    "stevearc/conform.nvim",
+		"stevearc/conform.nvim",
 
-    "j-hui/fidget.nvim",
+		"j-hui/fidget.nvim",
+
+    "mfussenegger/nvim-lint",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -56,7 +57,7 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-    require("fidget").setup({})
+		require("fidget").setup({})
 		require("conform").setup({
 			formatters_by_ft = {},
 		})
@@ -89,9 +90,9 @@ return {
 				"vtsls",
 				"tailwindcss",
 				-- "clangd",
-        "html",      -- Added
-        "cssls",     -- Added
-        "emmet_ls",  -- Added
+				"html", -- Added
+				"cssls", -- Added
+				"emmet_ls", -- Added
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -131,6 +132,25 @@ return {
 						},
 					})
 				end,
+				["gopls"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.gopls.setup({
+            capabilities = capabilities,
+						settings = {
+							gopls = {
+								analyses = {
+									unusedparams = true,
+									shadow = true,
+									nilness = true,
+									unusedwrite = true,
+									useany = true,
+								},
+								staticcheck = true,
+								gofumpt = true,
+							},
+						},
+					})
+				end,
 			},
 		})
 
@@ -156,7 +176,7 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" }, -- LSP
 
-        { name = "lazydev", group_index = 0 },
+				{ name = "lazydev", group_index = 0 },
 
 				{ name = "buffer" }, -- Buffers
 				{ name = "path" }, -- Paths
@@ -170,5 +190,24 @@ return {
 				}),
 			},
 		})
+
+    vim.diagnostic.config({
+      virtual_text = true,
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+    })
+
+    local lint = require("lint")
+    lint.linters_by_ft = {
+      go = { "golangcilint" },
+    }
+
+    vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+      callback = function()
+        lint.try_lint()
+      end,
+    })
 	end,
 }
