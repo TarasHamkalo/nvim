@@ -1,9 +1,10 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.5",
+	-- tag = "0.1.5",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"ahmedkhalf/project.nvim",
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 	},
 
 	config = function()
@@ -21,8 +22,12 @@ return {
 
     vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {desc = "Search for a file (ignoring git-ignore)"})
     vim.keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", {desc = "Find a string in project"})
-    vim.keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", {desc = "Show all buffers"})
+    vim.keymap.set('n', '<leader>fu', function()
+        local word = vim.fn.expand("<cword>")
+        require('telescope.builtin').grep_string({ search = word })
+    end)
 
+    vim.keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", {desc = "Show all buffers"})
     vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", {desc = "Show git branches"})
     vim.keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", {desc = "Show all commands"})
 	end,
