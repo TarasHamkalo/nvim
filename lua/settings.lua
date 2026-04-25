@@ -8,15 +8,35 @@ vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
 vim.cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
-	callback = function()
-		vim.opt_local.shiftwidth = 2
-		vim.opt_local.tabstop = 2
-	end
+  pattern = { "go", "python", "java", "javascript", "typescript", "html", "css", "xml" },
+  callback = function(args)
+    -- Default for web (TS, JS, HTML) and Java
+    local indent = 2
+    local expand = true
+
+    -- Language-specific overrides
+    if args.match == "python" then
+      indent = 4
+    elseif args.match == "go" then
+      indent = 2
+      expand = false -- Go MUST use physical tabs
+    end
+
+    vim.opt_local.shiftwidth = indent
+    vim.opt_local.tabstop = indent
+    vim.opt_local.softtabstop = indent
+    vim.opt_local.expandtab = expand
+  end
 })
 
--- File storage
 local opt = vim.opt
+
+-- Tabs
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.smartindent = true
+
 
 -- Undo
 opt.undofile = true
