@@ -38,17 +38,19 @@ keymap.set("n", "ss", ":split<Return>", {desc = "Split horizontally"})
 keymap.set("n", "sv", ":vsplit<Return>", {desc = "Split vertically"})
 --
 
--- Splits width
-keymap.set("n", "<c-h>", "<C-w><", {desc = "Make split wider"})
-keymap.set("n", "<c-l>", "<C-w>>", {desc = "Make split narrower"})
+-- -- Splits width
+-- keymap.set("n", "<c-h>", "<C-w><", {desc = "Make split wider"})
+-- keymap.set("n", "<c-l>", "<C-w>>", {desc = "Make split narrower"})
+--
+-- -- Split height
+-- keymap.set("n", "<c-k>", "<C-w>+", {desc = "Make split higher"})
+-- keymap.set("n", "<c-j>", "<C-w>-", {desc = "Make split shorter"})
 
--- Split height
-keymap.set("n", "<c-k>", "<C-w>+", {desc = "Make split higher"})
-keymap.set("n", "<c-j>", "<C-w>-", {desc = "Make split shorter"})
-
-
--- keymap.set("n", "<leader>-", "<cmd>vertical resize -10<CR>")
--- keymap.set("n", "<leader>=", "<cmd>vertical resize +10<CR>")
+-- Resizing splits with a fixed step (5 columns/lines)
+keymap.set("n", "<C-w><left>",  "<cmd>vertical resize -5<cr>",  { desc = "Move border left" })
+keymap.set("n", "<C-w><right>", "<cmd>vertical resize +5<cr>",  { desc = "Move border right" })
+keymap.set("n", "<C-w><up>",    "<cmd>resize +5<cr>",           { desc = "Move border up" })
+keymap.set("n", "<C-w><down>",  "<cmd>resize -5<cr>",           { desc = "Move border down" })
 
 -- Center screen
 keymap.set("n", "<c-u>", "<c-u>zz")
