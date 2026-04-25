@@ -38,3 +38,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts) -- show documentation for what is under cursor
   end
 })
+

@@ -1,9 +1,8 @@
+-- Some mapping is located also in "lua/after/auto.lua"
 local keymap = vim.keymap -- for conciseness
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Dap 
---
 -- Explorer
 keymap.set("n", "<leader>n", "<cmd>Explore<CR>", {desc = "Toggle file explorer"})
 vim.api.nvim_create_autocmd("FileType", {
@@ -21,6 +20,16 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.fn.system({ "trash-put", fullpath})
       vim.cmd("Explore")
     end, { buffer = true })
+  end,
+})
+
+-- Fugitive
+keymap.set("n", "<leader>m", "<cmd>Git<CR>", {desc = "Toggle Git Menu"})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "fugitive",
+  callback = function()
+    pcall(vim.keymap.del, "n", "s", { buffer = true })
+    pcall(vim.keymap.del, "n", "u", { buffer = true })
   end,
 })
 
