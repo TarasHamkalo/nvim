@@ -39,7 +39,7 @@ return {
 
 		"j-hui/fidget.nvim",
 
-    "mfussenegger/nvim-lint",
+		"mfussenegger/nvim-lint",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -78,6 +78,7 @@ return {
 				"prettierd",
 				"stylua",
 				-- "luacheck",
+        "clang-format",
 				"xmlformatter",
 				"yamlfix",
 			},
@@ -89,10 +90,10 @@ return {
 				"gopls",
 				"vtsls",
 				"tailwindcss",
-				-- "clangd",
-				"html", -- Added
-				"cssls", -- Added
-				"emmet_ls", -- Added
+				"clangd",
+				"html",
+				"cssls",
+				"emmet_ls",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -135,7 +136,7 @@ return {
 				["gopls"] = function()
 					local lspconfig = require("lspconfig")
 					lspconfig.gopls.setup({
-            capabilities = capabilities,
+						capabilities = capabilities,
 						settings = {
 							gopls = {
 								analyses = {
@@ -151,6 +152,41 @@ return {
 						},
 					})
 				end,
+        ["clangd"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.clangd.setup({
+            capabilities = capabilities,
+            root_markers = {
+              "compile_commands.json",
+              "compile_flags.txt",
+              "configure.ac", -- AutoTools
+              "Makefile",
+              "configure.ac",
+              "configure.in",
+              "config.h.in",
+              "meson.build",
+              "meson_options.txt",
+              "build.ninja",
+              ".git",
+            },
+            cmd = {
+              "clangd",
+              "--background-index",
+              "--clang-tidy",
+              -- "--header-insertion=never",
+              "--header-insertion=iwyu",
+              "--completion-style=detailed",
+              "--compile-commands-dir=build",
+              "--function-arg-placeholders",
+              "--fallback-style=llvm",
+            },
+            init_options = {
+              usePlaceholders = true,
+              completeUnimported = true,
+              clangdFileStatus = true,
+            },
+          })
+        end,
 			},
 		})
 
@@ -191,23 +227,23 @@ return {
 			},
 		})
 
-    vim.diagnostic.config({
-      virtual_text = true,
-      signs = true,
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-    })
+		vim.diagnostic.config({
+			virtual_text = true,
+			signs = true,
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
+		})
 
-    local lint = require("lint")
-    lint.linters_by_ft = {
-      go = { "golangcilint" },
-    }
+		local lint = require("lint")
+		lint.linters_by_ft = {
+			go = { "golangcilint" },
+		}
 
-    vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
-      callback = function()
-        lint.try_lint()
-      end,
-    })
+		vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+			callback = function()
+				lint.try_lint()
+			end,
+		})
 	end,
 }
