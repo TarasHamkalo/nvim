@@ -11,6 +11,9 @@ return {
         ignore_whitespace = false,
       },
     })
+    vim.keymap.set("n", "<C-W>g", function()
+      require("gitsigns").preview_hunk()
+    end, { desc = "Preview git hunk" })
 	end
 }
 

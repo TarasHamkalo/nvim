@@ -44,7 +44,7 @@ return {
 		end)
 
 		vim.keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", { desc = "Show all buffers" })
-		vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Show git branches" })
 		vim.keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", { desc = "Show all commands" })
+		-- vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Show git branches" })
 	end,
 }

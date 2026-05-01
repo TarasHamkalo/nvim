@@ -22,11 +22,11 @@ end, {
 	desc = "Toggle Debug breakpoint",
 })
 
-vim.keymap.set("n", "<leader>ds", function()
-	dap.close()
-end, {
-	desc = "Toggle Debug breakpoint",
-})
+-- vim.keymap.set("n", "<leader>ds", function()
+-- 	dap.close()
+-- end, {
+-- 	desc = "Toggle Debug breakpoint",
+-- })
 
 vim.keymap.set("n", "<leader>dB", function()
 	local condition = vim.fn.input "Breakpoint condition: "
@@ -38,3 +38,4 @@ end, {
 -- vim.keymap.set("n", "<F6>", function()
 -- 	dap.repl.open()
 -- end, { desc = "Open REPL" })
+

@@ -10,9 +10,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         opts.desc = "Show LSP type definitions"
         vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp type definitions
 
-        opts.desc = "Show LSP references"
-        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
-
+        -- opts.desc = "Show LSP references"
+        -- vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+        --
         opts.desc = "Show LSP implementations"
         vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
 
@@ -25,8 +25,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         opts.desc = "Smart rename"
         vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts) -- smart rename
 
-        opts.desc = "Show line diagnostics"
-        vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts) -- show diagnostics for line
+        -- opts.desc = "Show line diagnostics"
+        -- vim.keymap.set("n", "<leader>dd", function() vim.diagnostic.open_float() end, opts) -- show diagnostics for line
 
         opts.desc = "Go to previous diagnostic"
         vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count = -1}) end, opts) -- jump to previous diagnostic in buffer
