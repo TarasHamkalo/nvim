@@ -6,6 +6,9 @@ return {
 		"BufReadPost",
 		"BufNewFile",
 	},
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-context"
+  },
 	config = function()
     local configs = require("nvim-treesitter.configs")
     configs.setup({
@@ -37,6 +40,12 @@ return {
         enable = false,
         disable = {},
       },
+    })
+
+    require("treesitter-context").setup({
+      enable = true,
+      max_lines = 3, -- how many parent scopes to show
+      trim_scope = "outer",
     })
 	end,
 }
