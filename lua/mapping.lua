@@ -8,8 +8,14 @@ keymap.set("n", "<leader>n", "<cmd>Explore<CR>", {desc = "Toggle file explorer"}
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "netrw",
   callback = function()
+    -- save current window cwd (once)
+    if not vim.w._netrw_prev_cwd then
+      vim.w._netrw_prev_cwd = vim.fn.getcwd()
+    end
+
     -- update local window directory for move/copy and other to work in nav
     vim.cmd("lcd " .. vim.b.netrw_curdir)
+
     vim.opt.number = true
     vim.opt.relativenumber = true
 
@@ -41,6 +47,16 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.fn.setqflist(qf)
       vim.cmd("copen")
     end, { buffer = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+  callback = function()
+    if vim.bo.filetype == "netrw" and vim.w._netrw_prev_cwd then
+      print(vim.w._netrw_prev_cwd)
+      vim.cmd("lcd " .. vim.w._netrw_prev_cwd)
+      vim.w._netrw_prev_cwd = nil
+    end
   end,
 })
 
