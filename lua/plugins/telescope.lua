@@ -23,6 +23,10 @@ return {
 
 		local preview_utils = require("telescope.previewers.utils")
 		preview_utils.ts_highlighter = function(bufnr, ft)
+      if not ft or ft == "" then
+        return false
+      end
+
 			local lang = vim.treesitter.language.get_lang(ft) or ft
 			if not lang or lang == "" then
 				return false
@@ -45,6 +49,7 @@ return {
 
 		vim.keymap.set("n", "<leader>fr", "<cmd>Telescope buffers<CR>", { desc = "Show all buffers" })
 		vim.keymap.set("n", "<leader>ot", "<cmd>Telescope<CR>", { desc = "Show all commands" })
+		vim.keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "Show all git modified" })
 		-- vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Show git branches" })
 	end,
 }
