@@ -52,7 +52,7 @@ return {
 		vim.keymap.set({ "n", "v" }, "<leader>lf", function()
 			conform.format({
 				lsp_fallback = true,
-				async = false,
+				-- async = false,
 				timeout_ms = 3000,
 			})
 		end, { desc = "Format file or range" })
