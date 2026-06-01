@@ -8,25 +8,35 @@ vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
 vim.cmd([[autocmd BufRead,BufNewFile *.c,*.h set filetype=c]])
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "go", "python", "java", "javascript", "typescript", "html", "css", "xml" },
-  callback = function(args)
-    -- Default for web (TS, JS, HTML) and Java
-    local indent = 2
-    local expand = true
+	pattern = {
+		"go",
+		"python",
+		"java",
+		"javascript",
+		"typescript",
+		"html",
+		"css",
+		"xml",
+		"markdown",
+	},
+	callback = function(args)
+		-- Default for web (TS, JS, HTML) and Java
+		local indent = 2
+		local expand = true
 
-    -- Language-specific overrides
-    if args.match == "python" then
-      indent = 4
-    elseif args.match == "go" then
-      indent = 2
-      expand = false -- Go MUST use physical tabs
-    end
+		-- Language-specific overrides
+		if args.match == "python" then
+			indent = 4
+		elseif args.match == "go" then
+			indent = 2
+			expand = false -- Go MUST use physical tabs
+		end
 
-    vim.opt_local.shiftwidth = indent
-    vim.opt_local.tabstop = indent
-    vim.opt_local.softtabstop = indent
-    vim.opt_local.expandtab = expand
-  end
+		vim.opt_local.shiftwidth = indent
+		vim.opt_local.tabstop = indent
+		vim.opt_local.softtabstop = indent
+		vim.opt_local.expandtab = expand
+	end,
 })
 
 local opt = vim.opt
@@ -35,8 +45,9 @@ local opt = vim.opt
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.tabstop = 2
-opt.smartindent = true
+opt.softtabstop = 2
 
+opt.smartindent = true
 
 -- Undo
 opt.undofile = true
@@ -80,12 +91,6 @@ opt.visualbell = false
 -- NO FOLDS
 vim.wo.foldenable = false
 
--- Tabs
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.tabstop = 2
-opt.smartindent = true
-
 -- Clipboard
 opt.clipboard = "unnamedplus"
 opt.fixeol = false
@@ -111,4 +116,4 @@ opt.wildmode = "longest:full,full"
 
 -- Spell checker
 vim.opt.spell = true
-vim.opt.spelllang = {"en_us", "cs"}
+vim.opt.spelllang = { "en_us", "cs" }

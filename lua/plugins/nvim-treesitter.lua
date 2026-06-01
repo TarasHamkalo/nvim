@@ -6,19 +6,19 @@ return {
 		"BufReadPost",
 		"BufNewFile",
 	},
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-context"
-  },
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-context",
+	},
 	config = function()
-    local configs = require("nvim-treesitter.configs")
-    configs.setup({
-      ensure_installed = {
-        "markdown",
-        "lua",
-        "vim",
-        "vimdoc",
-        "c",
-        "java",
+		local configs = require("nvim-treesitter.configs")
+		configs.setup({
+			ensure_installed = {
+				"markdown",
+				"lua",
+				"vim",
+				"vimdoc",
+				"c",
+				"java",
 				"query",
 				"javascript",
 				"typescript",
@@ -27,25 +27,26 @@ return {
 				"json",
 				"gitignore",
 				"go",
-      },
+				"python"
+			},
 
-      sync_install = false,
+			sync_install = false,
 
-      highlight = {
-        enable = true,
-        disable = {},
-      },
+			highlight = {
+				enable = true,
+				disable = {},
+			},
 
-      indent = {
-        enable = false,
-        disable = {},
-      },
-    })
+			indent = {
+				enable = false,
+				disable = {},
+			},
+		})
 
-    require("treesitter-context").setup({
-      enable = true,
-      max_lines = 3, -- how many parent scopes to show
-      trim_scope = "outer",
-    })
+		require("treesitter-context").setup({
+			enable = true,
+			max_lines = 3, -- how many parent scopes to show
+			trim_scope = "outer",
+		})
 	end,
 }

@@ -15,6 +15,10 @@ return {
       require("gitsigns").preview_hunk()
     end, { desc = "Preview git hunk" })
 
+    vim.keymap.set("n", "<leader>rh", function()
+      require("gitsigns").reset_hunk()
+    end, { desc = "Reset git hunk" })
+
     vim.keymap.set("n", "[g", function()
       require("gitsigns").nav_hunk('prev')
     end, { desc = "Go to prev git hunk" })

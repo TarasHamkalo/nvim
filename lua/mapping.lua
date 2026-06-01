@@ -3,70 +3,107 @@ local keymap = vim.keymap -- for conciseness
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.keymap.set("n", "<leader>qr", function()
+	local info = vim.fn.getqflist({ idx = 0, size = 0 })
+	local idx = info.idx
+	local size = info.size
+
+	if size == 0 then
+		return
+	end
+
+	local qf = vim.fn.getqflist()
+	table.remove(qf, idx)
+
+	-- update list
+	vim.fn.setqflist(qf, "r")
+
+	-- decide where to go next
+	if #qf == 0 then
+		vim.cmd("cclose")
+		return
+	end
+
+	-- stay at same index unless we removed last item
+	local new_idx = idx
+	if idx > #qf then
+		new_idx = #qf
+	end
+
+	vim.cmd("cc " .. new_idx)
+end, { desc = "Delete qf entry and jump to next" })
+
 -- Explorer
-keymap.set("n", "<leader>n", "<cmd>Explore<CR>", {desc = "Toggle file explorer"})
+keymap.set("n", "<leader>n", "<cmd>Explore<CR>", { desc = "Toggle file explorer" })
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
-  callback = function()
-    -- save current window cwd (once)
-    if not vim.w._netrw_prev_cwd then
-      vim.w._netrw_prev_cwd = vim.fn.getcwd()
-    end
+	pattern = "netrw",
+	callback = function()
+		-- save current window cwd (once)
+		if not vim.w._netrw_prev_cwd then
+			vim.w._netrw_prev_cwd = vim.fn.getcwd()
+		end
 
-    -- update local window directory for move/copy and other to work in nav
-    vim.cmd("lcd " .. vim.b.netrw_curdir)
+		-- update local window directory for move/copy and other to work in nav
+		vim.cmd("lcd " .. vim.b.netrw_curdir)
 
-    vim.opt.number = true
-    vim.opt.relativenumber = true
+		vim.opt.number = true
+		vim.opt.relativenumber = true
 
-    pcall(vim.keymap.del, "n", "D", { buffer = true })
-    vim.keymap.set("n", "D", function()
-      local selected = vim.fn.expand("<cfile>:p")
-      vim.fn.system({ "trash-put", selected })
-      vim.cmd("edit .") -- refresh netrw
-    end, { buffer = true })
+		pcall(vim.keymap.del, "n", "D", { buffer = true })
+		vim.keymap.set("n", "D", function()
+			local selected = vim.fn.expand("<cfile>:p")
+			vim.fn.system({ "trash-put", selected })
+			vim.cmd("edit .") -- refresh netrw
+		end, { buffer = true })
 
-    vim.keymap.set("n", "<C-Q>", function()
-      local marked = vim.fn["netrw#Expose"]("netrwmarkfilelist")
-      if marked == "n/a" then
-        print("No marked files")
-        return
-      end
-      --
-      local qf = {}
-      for _, file in ipairs(marked) do
-        if vim.fn.isdirectory(file) == 0 then
-          table.insert(qf, {
-            filename = file,
-            lnum = 1,
-            text = "",
-          })
-        end
-      end
+		vim.keymap.set("n", "<C-Q>", function()
+			local marked = vim.fn["netrw#Expose"]("netrwmarkfilelist")
+			if marked == "n/a" then
+				print("No marked files")
+				return
+			end
+			--
+			local qf = {}
+			for _, file in ipairs(marked) do
+				if vim.fn.isdirectory(file) == 0 then
+					table.insert(qf, {
+						filename = file,
+						lnum = 1,
+						text = "",
+					})
+				end
+			end
 
-      vim.fn.setqflist(qf)
-      vim.cmd("copen")
-    end, { buffer = true })
-  end,
+			vim.fn.setqflist(qf)
+			vim.cmd("copen")
+		end, { buffer = true })
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufLeave", {
-  callback = function()
-    if vim.bo.filetype == "netrw" and vim.w._netrw_prev_cwd then
-      print(vim.w._netrw_prev_cwd)
-      vim.cmd("lcd " .. vim.w._netrw_prev_cwd)
-      vim.w._netrw_prev_cwd = nil
-    end
-  end,
+	callback = function()
+		if vim.bo.filetype == "netrw" and vim.w._netrw_prev_cwd then
+			vim.cmd("lcd " .. vim.w._netrw_prev_cwd)
+			vim.w._netrw_prev_cwd = nil
+		end
+	end,
 })
-
+-- vim.api.nvim_create_autocmd("BufEnter", {
+-- 	callback = function()
+--     if vim.bo.filetype ~= "netrw" and vim.w._netrw_prev_cwd then
+--       print("hello not netrw");
+--       vim.cmd("lcd " .. vim.w._netrw_prev_cwd)
+--       vim.w._netrw_prev_cwd = nil
+--     end
+-- 	end,
+-- })
 
 -- Fugitive
-keymap.set("n", "<leader>m", "<cmd>Git<CR>", {desc = "Toggle Git Menu"})
+keymap.set("n", "<leader>m", "<cmd>Git<CR>", { desc = "Toggle Git Menu" })
 
 -- Vim
 -- Noh search after ESC
-keymap.set("n", "<ESC>", "<ESC><cmd>noh<CR>", {desc = "Remove highlight"})
+keymap.set("n", "<ESC>", "<ESC><cmd>noh<CR>", { desc = "Remove highlight" })
 
 -- Resizing splits with a fixed step (5 columns/lines)
 keymap.set("n", "<C-A-h>", "<cmd>vertical resize -5<cr>")
@@ -82,7 +119,6 @@ keymap.set("n", "N", "Nzz")
 
 -- Lang
 --vim.api.nvim_set_option('langmap', 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz')
-
 
 -- Splits (just stick to defaults)
 -- keymap.set("n", "sh", "<c-w>h", {desc = "Split h"})

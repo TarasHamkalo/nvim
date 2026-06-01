@@ -39,6 +39,7 @@ return {
 
 		"j-hui/fidget.nvim",
 
+		-- linting plugin
 		"mfussenegger/nvim-lint",
 	},
 	config = function()
@@ -78,9 +79,11 @@ return {
 				"prettierd",
 				"stylua",
 				-- "luacheck",
-        "clang-format",
+				"clang-format",
 				"xmlformatter",
 				"yamlfix",
+
+				"ruff", -- python
 			},
 		})
 
@@ -94,6 +97,9 @@ return {
 				"html",
 				"cssls",
 				"emmet_ls",
+
+				-- Python
+				"pyright",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -152,41 +158,48 @@ return {
 						},
 					})
 				end,
-        ["clangd"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.clangd.setup({
-            capabilities = capabilities,
-            root_markers = {
-              "compile_commands.json",
-              "compile_flags.txt",
-              "configure.ac", -- AutoTools
-              "Makefile",
-              "configure.ac",
-              "configure.in",
-              "config.h.in",
-              "meson.build",
-              "meson_options.txt",
-              "build.ninja",
-              ".git",
-            },
-            cmd = {
-              "clangd",
-              "--background-index",
-              "--clang-tidy",
-              -- "--header-insertion=never",
-              "--header-insertion=iwyu",
-              "--completion-style=detailed",
-              "--compile-commands-dir=build",
-              "--function-arg-placeholders",
-              "--fallback-style=llvm",
-            },
-            init_options = {
-              usePlaceholders = true,
-              completeUnimported = true,
-              clangdFileStatus = true,
-            },
-          })
-        end,
+
+				["clangd"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.clangd.setup({
+						capabilities = capabilities,
+						root_markers = {
+							"compile_commands.json",
+							"compile_flags.txt",
+							"configure.ac", -- AutoTools
+							"Makefile",
+							"configure.ac",
+							"configure.in",
+							"config.h.in",
+							"meson.build",
+							"meson_options.txt",
+							"build.ninja",
+							".git",
+						},
+						cmd = {
+							"clangd",
+							"--background-index",
+							"--clang-tidy",
+							-- "--header-insertion=never",
+							"--header-insertion=iwyu",
+							"--completion-style=detailed",
+							"--compile-commands-dir=build",
+							"--function-arg-placeholders",
+							"--fallback-style=llvm",
+						},
+						init_options = {
+							usePlaceholders = true,
+							completeUnimported = true,
+							clangdFileStatus = true,
+						},
+					})
+				end,
+				["pyright"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.pyright.setup({
+						capabilities = capabilities,
+					})
+				end,
 			},
 		})
 
@@ -210,14 +223,11 @@ return {
 			}),
 
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" }, -- LSP
-
+				{ name = "nvim_lsp", priority = 4 }, -- LSP
+				{ name = "vimtex", priority = 2 },
+				{ name = "path", priority = 2 }, -- Paths
+				{ name = "buffer", priority = 1 }, -- Buffers
 				{ name = "lazydev", group_index = 0 },
-
-				{ name = "buffer" }, -- Buffers
-				{ name = "path" }, -- Paths
-
-				{ name = "vimtex" },
 			}),
 			formatting = {
 				format = require("lspkind").cmp_format({
@@ -227,14 +237,28 @@ return {
 			},
 		})
 
+		-- vim.diagnostic.config({
+		-- 	virtual_text = true,
+		-- 	signs = true,
+		-- 	underline = true,
+		-- 	update_in_insert = false,
+		-- 	severity_sort = true,
+		-- })
+		--
 		vim.diagnostic.config({
+			-- update_in_insert = true,
 			virtual_text = true,
 			signs = true,
 			underline = true,
-			update_in_insert = false,
-			severity_sort = true,
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				prefix = "",
+			},
 		})
-
 		local lint = require("lint")
 		lint.linters_by_ft = {
 			go = { "golangcilint" },
