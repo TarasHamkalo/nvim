@@ -168,6 +168,7 @@ return {
 							"compile_flags.txt",
 							"configure.ac", -- AutoTools
 							"Makefile",
+							"CMakeLists.txt",
 							"configure.ac",
 							"configure.in",
 							"config.h.in",
@@ -186,6 +187,7 @@ return {
 							"--compile-commands-dir=build",
 							"--function-arg-placeholders",
 							"--fallback-style=llvm",
+              "--include-directory=/usr/lib/gcc/x86_64-redhat-linux/15/include"
 						},
 						init_options = {
 							usePlaceholders = true,
